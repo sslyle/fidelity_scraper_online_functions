@@ -57,9 +57,11 @@ async def update_alert_details(page, form_container):
 
     if not has_edits:
         print('Inf/No edits necessary, clicking `Cancel`...')
-        save_button = form_container.locator('[fds-variant="primary"]').filter(has_text='Cancel')
-        await save_button.first.click()
+        cancel_button = form_container.locator('[fds-variant="secondary"]').filter(has_text='Cancel')
+        await page.wait_for_timeout(2000)
+        await cancel_button.first.click()
         await page.wait_for_timeout(defTimeOut)
+        await page.wait_for_timeout(2000)
         return True
 
     print('Inf/Clicking Save...')
